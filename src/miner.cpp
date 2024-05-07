@@ -389,12 +389,12 @@ bool validateAddress(std::string address)
 CBlockTemplate* CreateNewBlockWithAddress(std::string address)
 {
     CScript scriptPubKey;
-    if(chainActive.Height()+1>=MINERHODLINGHEIGHT && chainActive.Height()+1<THEUNFORKENING){
-        scriptPubKey = GetTimeLockScriptForDestination(CBitcoinAddress(address).Get(),chainActive.Height()+1+MINERHODLINGPERIOD);
-    }
-    else{
-        scriptPubKey = GetScriptForDestination(CBitcoinAddress(address).Get());
-    }
+    //if(chainActive.Height()+1>=MINERHODLINGHEIGHT && chainActive.Height()+1<THEUNFORKENING){
+    //    scriptPubKey = GetTimeLockScriptForDestination(CBitcoinAddress(address).Get(),chainActive.Height()+1+MINERHODLINGPERIOD);
+    //}
+    //else{
+    scriptPubKey = GetScriptForDestination(CBitcoinAddress(address).Get());
+    //}
 
     return CreateNewBlock(scriptPubKey);
 }
@@ -448,14 +448,14 @@ CBlockTemplate* CreateNewBlockWithKey(CReserveKey& reservekey)
         return NULL;
 
     CScript scriptPubKey;
-    if(chainActive.Height()+1>=MINERHODLINGHEIGHT && chainActive.Height()+1<THEUNFORKENING){
-        CScript altScriptPubKey = CScript() << ToByteVector(pubkey) << OP_CHECKSIG;
-        CTxDestination dest;
-        ExtractDestination(altScriptPubKey,dest);
-        scriptPubKey = GetTimeLockScriptForDestination(dest,chainActive.Height()+1+MINERHODLINGPERIOD);
-    }else{
-        scriptPubKey = CScript() << ToByteVector(pubkey) << OP_CHECKSIG;
-    }
+    //if(chainActive.Height()+1>=MINERHODLINGHEIGHT && chainActive.Height()+1<THEUNFORKENING){
+    //    CScript altScriptPubKey = CScript() << ToByteVector(pubkey) << OP_CHECKSIG;
+    //    CTxDestination dest;
+    //    ExtractDestination(altScriptPubKey,dest);
+    //    scriptPubKey = GetTimeLockScriptForDestination(dest,chainActive.Height()+1+MINERHODLINGPERIOD);
+    //}else{
+    scriptPubKey = CScript() << ToByteVector(pubkey) << OP_CHECKSIG;
+    //}
     return CreateNewBlock(scriptPubKey);
 }
 

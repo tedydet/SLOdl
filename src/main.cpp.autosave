@@ -1253,13 +1253,13 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
         return 0;
 
     CAmount nSubsidy = 50 * COIN;
-    //if(nHeight>MININGFEESFORK){
-    //    nSubsidy = 500 * COIN;
-    //}
+    if(nHeight>MININGFEESFORK){
+        nSubsidy = 500 * COIN;
+    }
 
-    //if(nHeight>MININGFEESFORK2){
-    //    nSubsidy = 50 * COIN;
-    //}
+    if(nHeight>MININGFEESFORK2){
+        nSubsidy = 50 * COIN;
+    }
 
     // Subsidy is cut in half every approximately every 4 years.
     nSubsidy >>= halvings;
@@ -1987,15 +1987,15 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                                block.vtx[0].GetValueOut(), blockReward),
                                REJECT_INVALID, "bad-cb-amount");
 
-    //if(pindex->nHeight>=MINERHODLINGHEIGHT && pindex->nHeight<THEUNFORKENING){
+    if(pindex->nHeight>=MINERHODLINGHEIGHT && pindex->nHeight<THEUNFORKENING){
         //Extra checks to ensure miner is a HODLER
-    //    if (block.vtx[0].vout.size() != 1){
-    //        return state.DoS(100,error("ConnectBlock(): coinbase transaction does not have 1 output"),REJECT_INVALID, "bad-cb-outputtx-number");
-    //    }
-    //    if (block.vtx[0].vout[0].scriptPubKey.GetTermDepositReleaseBlock() != pindex->nHeight+MINERHODLINGPERIOD){
-    //        return state.DoS(100,error("ConnectBlock(): coinbase transaction does not HOdl for one year, hodlblocks=%d, expected=%d\n",block.vtx[0].vout[0].scriptPubKey.GetTermDepositReleaseBlock(),pindex->nHeight+MINERHODLINGPERIOD),REJECT_INVALID, "bad-cb-outputtx-hodlingperiod");
-    //    }
-    //}
+        if (block.vtx[0].vout.size() != 1){
+            return state.DoS(100,error("ConnectBlock(): coinbase transaction does not have 1 output"),REJECT_INVALID, "bad-cb-outputtx-number");
+        }
+        if (block.vtx[0].vout[0].scriptPubKey.GetTermDepositReleaseBlock() != pindex->nHeight+MINERHODLINGPERIOD){
+            return state.DoS(100,error("ConnectBlock(): coinbase transaction does not HOdl for one year, hodlblocks=%d, expected=%d\n",block.vtx[0].vout[0].scriptPubKey.GetTermDepositReleaseBlock(),pindex->nHeight+MINERHODLINGPERIOD),REJECT_INVALID, "bad-cb-outputtx-hodlingperiod");
+        }
+    }
 
     if (!control.Wait())
         return state.DoS(100, false);
@@ -4074,15 +4074,15 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        //if (pfrom->nVersion < (chainActive.Height() < MININGFEESFORK2-4000 ? MIN_PEER_PROTO_MINERFEES_VERSION : MIN_PEER_PROTO_MINERFEES2_VERSION))
-        //{
+        if (pfrom->nVersion < (chainActive.Height() < MININGFEESFORK2-4000 ? MIN_PEER_PROTO_MINERFEES_VERSION : MIN_PEER_PROTO_MINERFEES2_VERSION))
+        {
             // disconnect from peers older than this proto version
-        //    LogPrintf("peer=%d using obsolete version %i; disconnecting\n", pfrom->id, pfrom->nVersion);
-        //    pfrom->PushMessage("reject", strCommand, REJECT_OBSOLETE,
-        //                       strprintf("Version must be %d or greater", MIN_PEER_PROTO_VERSION));
-        //    pfrom->fDisconnect = true;
-        //    return false;
-        //}
+            LogPrintf("peer=%d using obsolete version %i; disconnecting\n", pfrom->id, pfrom->nVersion);
+            pfrom->PushMessage("reject", strCommand, REJECT_OBSOLETE,
+                               strprintf("Version must be %d or greater", MIN_PEER_PROTO_VERSION));
+            pfrom->fDisconnect = true;
+            return false;
+        }
 
         if (pfrom->nVersion == 10300)
             pfrom->nVersion = 300;

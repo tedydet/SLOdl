@@ -11,9 +11,9 @@
 #include "serialize.h"
 #include "uint256.h"
 
-static const unsigned int THEUNFORKENING = 257000;
-static const unsigned int MININGFEESFORK = 683000;
-static const unsigned int MININGFEESFORK2 = 734000;
+//static const unsigned int THEUNFORKENING = 257000;
+//static const unsigned int MININGFEESFORK = 683000;
+//static const unsigned int MININGFEESFORK2 = 734000;
 
 
 /** An outpoint - a combination of a transaction hash and an index n into its vout */

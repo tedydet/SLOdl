@@ -75,11 +75,11 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle *networkStyle, QWidget *parent) :
     progressBar(0),
     progressDialog(0),
     appMenuBar(0),
-    overviewAction(0),
+    //overviewAction(0),
     historyAction(0),
     quitAction(0),
     sendCoinsAction(0),
-    depositCoinsAction(0),
+    //depositCoinsAction(0),
     sendCoinsMenuAction(0),
     usedSendingAddressesAction(0),
     usedReceivingAddressesAction(0),
@@ -287,12 +287,12 @@ void BitcoinGUI::createActions()
     sendCoinsMenuAction->setStatusTip(sendCoinsAction->statusTip());
     sendCoinsMenuAction->setToolTip(sendCoinsMenuAction->statusTip());
 
-    depositCoinsAction = new QAction(SingleColorIcon(":/icons/deposit"), tr("&Deposit"), this);
-    depositCoinsAction->setStatusTip(tr("Make a term deposit"));
-    depositCoinsAction->setToolTip(depositCoinsAction->statusTip());
-    depositCoinsAction->setCheckable(true);
-    depositCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
-    tabGroup->addAction(depositCoinsAction);
+    //depositCoinsAction = new QAction(SingleColorIcon(":/icons/deposit"), tr("&Deposit"), this);
+    //depositCoinsAction->setStatusTip(tr("Make a term deposit"));
+    //depositCoinsAction->setToolTip(depositCoinsAction->statusTip());
+    //depositCoinsAction->setCheckable(true);
+    //depositCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
+    //tabGroup->addAction(depositCoinsAction);
 
     //depositCoinsMenuAction = new QAction(TextColorIcon(":/icons/deposit"), depositCoinsAction->text(), this);
     //depositCoinsMenuAction->setStatusTip(depositCoinsAction->statusTip());
@@ -332,8 +332,8 @@ void BitcoinGUI::createActions()
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(gotoOverviewPage()));
     connect(sendCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(sendCoinsAction, SIGNAL(triggered()), this, SLOT(gotoSendCoinsPage()));
-    connect(depositCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
-    connect(depositCoinsAction, SIGNAL(triggered()), this, SLOT(gotoDepositCoinsPage()));
+    //connect(depositCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    //connect(depositCoinsAction, SIGNAL(triggered()), this, SLOT(gotoDepositCoinsPage()));
     connect(sendCoinsMenuAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(sendCoinsMenuAction, SIGNAL(triggered()), this, SLOT(gotoSendCoinsPage()));
     connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
@@ -478,7 +478,7 @@ void BitcoinGUI::createToolBars()
         toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
         toolbar->addAction(overviewAction);
         toolbar->addAction(sendCoinsAction);
-        toolbar->addAction(depositCoinsAction);
+        //toolbar->addAction(depositCoinsAction);
         toolbar->addAction(receiveCoinsAction);
         toolbar->addAction(historyAction);
         overviewAction->setChecked(true);
@@ -558,7 +558,7 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
 {
     overviewAction->setEnabled(enabled);
     sendCoinsAction->setEnabled(enabled);
-    depositCoinsAction->setEnabled(enabled);
+    //depositCoinsAction->setEnabled(enabled);
     sendCoinsMenuAction->setEnabled(enabled);
     receiveCoinsAction->setEnabled(enabled);
     receiveCoinsMenuAction->setEnabled(enabled);
@@ -701,11 +701,11 @@ void BitcoinGUI::gotoSendCoinsPage(QString addr)
     if (walletFrame) walletFrame->gotoSendCoinsPage(addr);
 }
 
-void BitcoinGUI::gotoDepositCoinsPage(QString addr)
-{
-    depositCoinsAction->setChecked(true);
-    if (walletFrame) walletFrame->gotoDepositCoinsPage(addr);
-}
+//void BitcoinGUI::gotoDepositCoinsPage(QString addr)
+//{
+//    depositCoinsAction->setChecked(true);
+//    if (walletFrame) walletFrame->gotoDepositCoinsPage(addr);
+//}
 
 
 void BitcoinGUI::gotoSignMessageTab(QString addr)
