@@ -1,5 +1,5 @@
 .NOTPARALLEL :
-
+CPPFLAGS += -I/usr/include/freetype2
 SOURCES_PATH ?= $(BASEDIR)/sources
 BASE_CACHE ?= $(BASEDIR)/built
 SDK_PATH ?= $(BASEDIR)/SDKs
