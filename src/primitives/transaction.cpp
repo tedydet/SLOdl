@@ -200,10 +200,10 @@ std::string initRateTable(){
     bonusTable[0]=1;
     bonusTable[0]=bonusTable[0]<<54;
 
-    //Interest rate on each block 1+(1/2^22)
+    //Interest rate on each block 1+(1/2^21)
     for(int i=1;i<ONEYEARPLUS1;i++){
-        rateTable[i]=rateTable[i-1]+(rateTable[i-1]>>22);
-        bonusTable[i]=bonusTable[i-1]+(bonusTable[i-1]>>16);
+        rateTable[i]=rateTable[i-1]+(rateTable[i-1]>>21);
+        bonusTable[i]=bonusTable[i-1]+(bonusTable[i-1]>>16); //not used
         str += strprintf("%d %x %x\n",i,rateTable[i], bonusTable[i]);
     }
 
