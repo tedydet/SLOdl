@@ -126,7 +126,7 @@ public:
 
 	vFixedSeeds.clear();
         vSeeds.clear();
-        //vSeeds.push_back(CDNSSeedData("westcoast.hodlcoin.com", "westcoast.hodlcoin.com")); //West Coast
+        //vSeeds.push_back(CDNSSeedData("westcoast.hashbeans.com", "westcoast.hashbeans.com")); //West Coast
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,10);
@@ -225,7 +225,7 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        //vSeeds.push_back(CDNSSeedData("westcoast.hodlcoin.com", "westcoast.hodlcoin.com")); //West Coast
+        //vSeeds.push_back(CDNSSeedData("westcoast.hashbeans.com", "westcoast.hashbeans.com")); //West Coast
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,43);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,7);

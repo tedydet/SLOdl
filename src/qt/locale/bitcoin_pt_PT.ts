@@ -160,8 +160,8 @@
         <translation>Confirmar encriptação da carteira</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HODLCOINS&lt;/b&gt;!</source>
-        <translation>Atenção: Se encriptar a carteira e perder a sua senha irá &lt;b&gt;PERDER TODOS OS SEUS HODLCOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HABSCOINS&lt;/b&gt;!</source>
+        <translation>Atenção: Se encriptar a carteira e perder a sua senha irá &lt;b&gt;PERDER TODOS OS SEUS HABSCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -391,8 +391,8 @@
         <translation>Bitcoin Core</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and hodlcoin: URIs)</source>
-        <translation>Solicitar pagamentos (gera códigos QR e URIs hodlcoin:)</translation>
+        <source>Request payments (generates QR codes and hashbeans: URIs)</source>
+        <translation>Solicitar pagamentos (gera códigos QR e URIs hashbeans:)</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
@@ -411,8 +411,8 @@
         <translation>Mostrar a lista de rótulos e endereços de receção usados</translation>
     </message>
     <message>
-        <source>Open a hodlcoin: URI or payment request</source>
-        <translation>Abrir URI hodlcoin: ou pedido de pagamento</translation>
+        <source>Open a hashbeans: URI or payment request</source>
+        <translation>Abrir URI hashbeans: ou pedido de pagamento</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -1248,8 +1248,8 @@
         <translation>Erro de pedido de pagamento</translation>
     </message>
     <message>
-        <source>Cannot start hodlcoin: click-to-pay handler</source>
-        <translation>Impossível iniciar o controlador de hodlcoin: click-to-pay</translation>
+        <source>Cannot start hashbeans: click-to-pay handler</source>
+        <translation>Impossível iniciar o controlador de hashbeans: click-to-pay</translation>
     </message>
     <message>
         <source>Payment request fetch URL is invalid: %1</source>
@@ -2083,8 +2083,8 @@
         <translation>Introduza um rótulo para este endereço para o adicionar à sua lista de endereços usados</translation>
     </message>
     <message>
-        <source>A message that was attached to the hodlcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>Uma mensagem que estava anexada ao URI hodlcoin: que será armazenada com a transação para sua referência. Nota: Esta mensagem não será enviada através da rede Bitcoin.</translation>
+        <source>A message that was attached to the hashbeans: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <translation>Uma mensagem que estava anexada ao URI hashbeans: que será armazenada com a transação para sua referência. Nota: Esta mensagem não será enviada através da rede Bitcoin.</translation>
     </message>
     <message>
         <source>Pay To:</source>

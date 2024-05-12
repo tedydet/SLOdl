@@ -408,7 +408,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "HOdlcoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "HashBeans";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -420,10 +420,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "HOdlcoin";
+    return pathRet / "HashBeans";
 #else
     // Unix
-    return pathRet / ".hodlcoin";
+    return pathRet / ".hashbeans";
 #endif
 #endif
 }
@@ -470,7 +470,7 @@ void ClearDatadirCache()
 
 boost::filesystem::path GetConfigFile()
 {
-    boost::filesystem::path pathConfigFile(GetArg("-conf", "hodlcoin.conf"));
+    boost::filesystem::path pathConfigFile(GetArg("-conf", "hashbeans.conf"));
     if (!pathConfigFile.is_complete())
         pathConfigFile = GetDataDir(false) / pathConfigFile;
 
@@ -482,14 +482,14 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 {
     boost::filesystem::ifstream streamConfig(GetConfigFile());
     if (!streamConfig.good())
-        return; // No hodlcoin.conf file is OK
+        return; // No hashbeans.conf file is OK
 
     set<string> setOptions;
     setOptions.insert("*");
 
     for (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it)
     {
-        // Don't overwrite existing settings so command line settings override hodlcoin.conf
+        // Don't overwrite existing settings so command line settings override hashbeans.conf
         string strKey = string("-") + it->string_key;
         if (mapSettingsRet.count(strKey) == 0)
         {

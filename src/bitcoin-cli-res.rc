@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "HOdlcoin"
-            VALUE "FileDescription",    "hodlcoin-cli (JSON-RPC client for Bitcoin Core)"
+            VALUE "CompanyName",        "BeanHash"
+            VALUE "FileDescription",    "beanhash-cli (JSON-RPC client for Bitcoin Core)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "hodlcoin-cli"
+            VALUE "InternalName",       "beanhash-cli"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "hodlcoin-cli.exe"
-            VALUE "ProductName",        "hodlcoin-cli"
+            VALUE "OriginalFilename",   "beanhash-cli.exe"
+            VALUE "ProductName",        "beanhash-cli"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

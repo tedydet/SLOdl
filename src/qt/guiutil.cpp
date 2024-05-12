@@ -107,7 +107,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a HOdlcoin address (e.g. %1)").arg("HMtDP17aq8X35d6gXy7RDQLuGVSdwtqHrq"));
+    widget->setPlaceholderText(QObject::tr("Enter a HashBeans address (e.g. %1)").arg("BNvZpuwPYTQVFg42YD4BT5MiMhwu3MWH7C"));
 #endif
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
     widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
@@ -124,8 +124,8 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
 
 bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no hodlcoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("hodlcoin"))
+    // return if URI is not valid or is no hashbeans: URI
+    if(!uri.isValid() || uri.scheme() != QString("hashbeans"))
         return false;
 
     SendCoinsRecipient rv;
@@ -165,7 +165,7 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!BitcoinUnits::parse(BitcoinUnits::HODL, i->second, &rv.amount))
+                if(!BitcoinUnits::parse(BitcoinUnits::HABS, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -185,13 +185,13 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 
 bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 {
-    // Convert hodlcoin:// to hodlcoin:
+    // Convert hashbeans:// to hashbeans:
     //
-    //    Cannot handle this later, because hodlcoin:// will cause Qt to see the part after // as host,
+    //    Cannot handle this later, because hashbeans:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("hodlcoin://", Qt::CaseInsensitive))
+    if(uri.startsWith("hashbeans://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 10, "hodlcoin:");
+        uri.replace(0, 10, "hashbeans:");
     }
     QUrl uriInstance(uri);
     return parseBitcoinURI(uriInstance, out);
@@ -199,12 +199,12 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 
 QString formatBitcoinURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("hodlcoin:%1").arg(info.address);
+    QString ret = QString("hashbeans:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::HODL, info.amount, false, BitcoinUnits::separatorNever));
+        ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::HABS, info.amount, false, BitcoinUnits::separatorNever));
         paramCount++;
     }
 
@@ -569,11 +569,11 @@ TableViewLastColumnResizingFixer::TableViewLastColumnResizingFixer(QTableView* t
 boost::filesystem::path static StartupShortcutPath()
 {
     if (GetBoolArg("-testnet", false))
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "HOdlcoin (testnet).lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "HashBeans (testnet).lnk";
     else if (GetBoolArg("-regtest", false))
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "HOdlcoin (regtest).lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "HashBeans (regtest).lnk";
 
-    return GetSpecialFolderPath(CSIDL_STARTUP) / "HOdlcoin.lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / "HashBeans.lnk";
 }
 
 bool GetStartOnSystemStartup()
@@ -710,11 +710,11 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (GetBoolArg("-testnet", false))
-            optionFile << "Name=HOdlcoin (testnet)\n";
+            optionFile << "Name=HashBeans (testnet)\n";
         else if (GetBoolArg("-regtest", false))
-            optionFile << "Name=HOdlcoin (regtest)\n";
+            optionFile << "Name=HashBeans (regtest)\n";
         else
-            optionFile << "Name=HOdlcoin\n";
+            optionFile << "Name=HashBeans\n";
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", GetBoolArg("-testnet", false), GetBoolArg("-regtest", false));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";

@@ -101,7 +101,7 @@ Value getgenerate(const Array& params, bool fHelp)
         throw runtime_error(
             "getgenerate\n"
             "\nReturn if the server is set to generate coins or not. The default is false.\n"
-            "It is set with the command line argument -gen (or hodlcoin.conf setting gen)\n"
+            "It is set with the command line argument -gen (or hashbeans.conf setting gen)\n"
             "It can also be set with the setgenerate call.\n"
             "\nResult\n"
             "true|false      (boolean) If the server is set to generate coins or not\n"
@@ -288,7 +288,7 @@ Value getmininginfo(const Array& params, bool fHelp)
 }
 
 
-// NOTE: Unlike wallet RPC (which use HODL values), mining RPCs follow GBT (BIP 22) in using satoshi amounts
+// NOTE: Unlike wallet RPC (which use HABS values), mining RPCs follow GBT (BIP 22) in using satoshi amounts
 Value prioritisetransaction(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 3)
@@ -454,10 +454,10 @@ Value getblocktemplate(const Array& params, bool fHelp)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid mode");
 
     if (vNodes.empty())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "HOdlcoin is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "HashBeans is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "HOdlcoin is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "HashBeans is downloading blocks...");
 
     static unsigned int nTransactionsUpdatedLast;
 

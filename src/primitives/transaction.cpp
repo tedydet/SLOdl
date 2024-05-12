@@ -237,7 +237,7 @@ CAmount GetInterest(CAmount nValue, int outputBlockHeight, int valuationHeight, 
         //Need the minimum of three figures - one year, valuation height, or maturation period
     //    if(valuationHeight>=THEUNFORKENING){
     //        blocks=std::min(blocks,maturationBlock-outputBlockHeight);
-            //If a user hodls before is up to date with chain, the maturation date can appear in the past, causing a crash trying to calculate negative interest
+            //If a user habss before is up to date with chain, the maturation date can appear in the past, causing a crash trying to calculate negative interest
     //        blocks=std::max(blocks,0);
     //    }
     //}

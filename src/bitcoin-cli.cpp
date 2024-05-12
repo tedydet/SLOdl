@@ -20,7 +20,7 @@ std::string HelpMessageCli()
     string strUsage;
     strUsage += HelpMessageGroup(_("Options:"));
     strUsage += HelpMessageOpt("-?", _("This help message"));
-    strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), "hodlcoin.conf"));
+    strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), "hashbeans.conf"));
     strUsage += HelpMessageOpt("-datadir=<dir>", _("Specify data directory"));
     strUsage += HelpMessageOpt("-testnet", _("Use the test network"));
     strUsage += HelpMessageOpt("-regtest", _("Enter regression test mode, which uses a special chain in which blocks can be "
@@ -31,7 +31,7 @@ std::string HelpMessageCli()
     strUsage += HelpMessageOpt("-rpcuser=<user>", _("Username for JSON-RPC connections"));
     strUsage += HelpMessageOpt("-rpcpassword=<pw>", _("Password for JSON-RPC connections"));
 
-    strUsage += HelpMessageGroup(_("SSL options: (see the HOdlcoin Wiki for SSL setup instructions)"));
+    strUsage += HelpMessageGroup(_("SSL options: (see the HashBeans Wiki for SSL setup instructions)"));
     strUsage += HelpMessageOpt("-rpcssl", _("Use OpenSSL (https) for JSON-RPC connections"));
 
     return strUsage;
@@ -63,12 +63,12 @@ static bool AppInitRPC(int argc, char* argv[])
     //
     ParseParameters(argc, argv);
     if (argc<2 || mapArgs.count("-?") || mapArgs.count("-h") || mapArgs.count("-help") || mapArgs.count("-version")) {
-        std::string strUsage = _("HOdlcoin Core RPC client version") + " " + FormatFullVersion() + "\n";
+        std::string strUsage = _("HashBeans Core RPC client version") + " " + FormatFullVersion() + "\n";
         if (!mapArgs.count("-version")) {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  hodlcoin-cli [options] <command> [params]  " + _("Send command to HOdlcoin Core") + "\n" +
-                  "  hodlcoin-cli [options] help                " + _("List commands") + "\n" +
-                  "  hodlcoin-cli [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  hashbeans-cli [options] <command> [params]  " + _("Send command to HashBeans Core") + "\n" +
+                  "  hashbeans-cli [options] help                " + _("List commands") + "\n" +
+                  "  hashbeans-cli [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessageCli();
         }

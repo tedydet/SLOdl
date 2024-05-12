@@ -389,8 +389,8 @@ bool validateAddress(std::string address)
 CBlockTemplate* CreateNewBlockWithAddress(std::string address)
 {
     CScript scriptPubKey;
-    //if(chainActive.Height()+1>=MINERHODLINGHEIGHT && chainActive.Height()+1<THEUNFORKENING){
-    //    scriptPubKey = GetTimeLockScriptForDestination(CBitcoinAddress(address).Get(),chainActive.Height()+1+MINERHODLINGPERIOD);
+    //if(chainActive.Height()+1>=MINERHABSINGHEIGHT && chainActive.Height()+1<THEUNFORKENING){
+    //    scriptPubKey = GetTimeLockScriptForDestination(CBitcoinAddress(address).Get(),chainActive.Height()+1+MINERHABSINGPERIOD);
     //}
     //else{
     scriptPubKey = GetScriptForDestination(CBitcoinAddress(address).Get());
@@ -448,11 +448,11 @@ CBlockTemplate* CreateNewBlockWithKey(CReserveKey& reservekey)
         return NULL;
 
     CScript scriptPubKey;
-    //if(chainActive.Height()+1>=MINERHODLINGHEIGHT && chainActive.Height()+1<THEUNFORKENING){
+    //if(chainActive.Height()+1>=MINERHABSINGHEIGHT && chainActive.Height()+1<THEUNFORKENING){
     //    CScript altScriptPubKey = CScript() << ToByteVector(pubkey) << OP_CHECKSIG;
     //    CTxDestination dest;
     //    ExtractDestination(altScriptPubKey,dest);
-    //    scriptPubKey = GetTimeLockScriptForDestination(dest,chainActive.Height()+1+MINERHODLINGPERIOD);
+    //    scriptPubKey = GetTimeLockScriptForDestination(dest,chainActive.Height()+1+MINERHABSINGPERIOD);
     //}else{
     scriptPubKey = CScript() << ToByteVector(pubkey) << OP_CHECKSIG;
     //}
@@ -468,7 +468,7 @@ static bool ProcessBlockFound(CBlock* pblock, CWallet& wallet, CReserveKey& rese
     {
         LOCK(cs_main);
         if (pblock->hashPrevBlock != chainActive.Tip()->GetBlockHash())
-            return error("HOdlcoinMiner: generated block is stale");
+            return error("HashBeansMiner: generated block is stale");
     }
 
     // Remove key from key pool
@@ -483,7 +483,7 @@ static bool ProcessBlockFound(CBlock* pblock, CWallet& wallet, CReserveKey& rese
     // Process this block the same as if we had received it from another node
     CValidationState state;
     if (!ProcessNewBlock(state, NULL, pblock, true, NULL))
-        return error("HOdlcoinMiner: ProcessNewBlock, block not accepted");
+        return error("HashBeansMiner: ProcessNewBlock, block not accepted");
 
     return true;
 }
@@ -508,7 +508,7 @@ void static BitcoinMiner(CWallet *pwallet, uint32_t minerI, uint32_t minerN, int
 {
 	fGenerate = true;
 	minerStopFlag = 0;
-    LogPrintf("HOdlcoinMiner started\n");
+    LogPrintf("HashBeansMiner started\n");
     srand(clock());
     string ma=GetArg("-miningaddress", "");
     //std::vector<std::string> arr=split(ma+"",';');
@@ -561,25 +561,25 @@ void static BitcoinMiner(CWallet *pwallet, uint32_t minerI, uint32_t minerN, int
 
             if(ma!=""){
             	if(validateAddress(ma)) {
-                    LogPrintf("HOdlcoinMiner: Mining to User supplied address %s\n",ma);
+                    LogPrintf("HashBeansMiner: Mining to User supplied address %s\n",ma);
                     pblocktemplate= auto_ptr<CBlockTemplate>(CreateNewBlockWithAddress(ma));
                 }else{
-                    LogPrintf("HOdlcoinMiner: WARNING! User supplied address is invalid, defaulting to keypool address.\n");
+                    LogPrintf("HashBeansMiner: WARNING! User supplied address is invalid, defaulting to keypool address.\n");
                     pblocktemplate= auto_ptr<CBlockTemplate>(CreateNewBlockWithKey(reservekey));
                 }
             }else{
-                LogPrintf("HOdlcoinMiner: Mining to keypool address.\n");
+                LogPrintf("HashBeansMiner: Mining to keypool address.\n");
                 pblocktemplate= auto_ptr<CBlockTemplate>(CreateNewBlockWithKey(reservekey));
             }
             if (!pblocktemplate.get())
             {
-                LogPrintf("HOdlcoinMiner: ERROR! Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
+                LogPrintf("HashBeansMiner: ERROR! Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
                 return;
             }
             CBlock *pblock = &pblocktemplate->block;
             IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
 
-            LogPrintf("Running HOdlcoinMiner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
+            LogPrintf("Running HashBeansMiner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
                 ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
 
             //
@@ -604,7 +604,7 @@ void static BitcoinMiner(CWallet *pwallet, uint32_t minerI, uint32_t minerN, int
                     hash = pblock->FindBestPatternHash(collisions, scratchpad, nThreads, &minerStopFlag);
                     totalHashes = totalHashes + collisions;
                     dHashesPerSec = (time(NULL) != startTime ? totalHashes / (time(NULL) - startTime) : 0);
-                    LogPrintf("HOdlcoinMiner: %d/%d\n", minerI, minerN);
+                    LogPrintf("HashBeansMiner: %d/%d\n", minerI, minerN);
                     LogPrintf("search finished - best hash  \n  hash: %s collisions:%d gethash:%s ba:%d bb:%d nonce:%d \ntarget: %s\n", hash.GetHex(), collisions, pblock->GetHash().GetHex(), pblock->nStartLocation, pblock->nFinalCalculation, pblock->nNonce, hashTarget.GetHex());
                     assert(hash.GetHex()==pblock->GetHash().GetHex());
                     LogPrintf("Hashes Per Second=%d (total seconds=%d hashes=%d)\n", dHashesPerSec, time(NULL) - startTime, totalHashes);
@@ -612,7 +612,7 @@ void static BitcoinMiner(CWallet *pwallet, uint32_t minerI, uint32_t minerN, int
                     if (UintToArith256(hash) <= hashTarget) {
                         assert(hash == pblock->GetHash());
                         SetThreadPriority(THREAD_PRIORITY_NORMAL);
-                        LogPrintf("HOdlcoinMiner:\n");
+                        LogPrintf("HashBeansMiner:\n");
                         LogPrintf("proof-of-work found  \n  hash: %s  \ntarget: %s\n", hash.GetHex(), hashTarget.GetHex());
                         ProcessBlockFound(pblock, *pwallet, reservekey);
                         SetThreadPriority(THREAD_PRIORITY_LOWEST);
@@ -647,14 +647,14 @@ void static BitcoinMiner(CWallet *pwallet, uint32_t minerI, uint32_t minerN, int
     }
     catch (const boost::thread_interrupted&)
     {
-        LogPrintf("HOdlcoinMiner terminated\n");
+        LogPrintf("HashBeansMiner terminated\n");
         aligned_free(scratchpad);
         fGenerate = false;
         return;
     }
     catch (const std::runtime_error &e)
     {
-        LogPrintf("HOdlcoinMiner runtime error: %s\n", e.what());
+        LogPrintf("HashBeansMiner runtime error: %s\n", e.what());
         aligned_free(scratchpad);
         fGenerate = false;
         return;

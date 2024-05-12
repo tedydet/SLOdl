@@ -56,9 +56,9 @@ public:
      */
     enum Unit
     {
-        HODL,
-        mHODL,
-        uHODL
+        HABS,
+        mHABS,
+        uHABS
     };
 
     enum SeparatorStyle

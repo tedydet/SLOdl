@@ -254,10 +254,10 @@ Value stop(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "\nStop HOdlcoin server.");
+            "\nStop HashBeans server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "HOdlcoin server stopping";
+    return "HashBeans server stopping";
 }
 
 
@@ -604,7 +604,7 @@ void StartRPCThreads()
         unsigned char rand_pwd[32];
         GetRandBytes(rand_pwd, 32);
         uiInterface.ThreadSafeMessageBox(strprintf(
-            _("To use bitcoind, or the -server option to hodlcoin-qt, you must set an rpcpassword in the configuration file:\n"
+            _("To use hashbeansd, or the -server option to hashbeans-qt, you must set an rpcpassword in the configuration file:\n"
               "%s\n"
               "It is recommended you use the following random password:\n"
               "rpcuser=bitcoinrpc\n"
@@ -613,7 +613,7 @@ void StartRPCThreads()
               "The username and password MUST NOT be the same.\n"
               "If the file does not exist, create it with owner-readable-only file permissions.\n"
               "It is also recommended to set alertnotify so you are notified of problems;\n"
-              "for example: alertnotify=echo %%s | mail -s \"HOdlcoin Alert\" admin@foo.com\n"),
+              "for example: alertnotify=echo %%s | mail -s \"HashBeans Alert\" admin@foo.com\n"),
                 GetConfigFile().string(),
                 EncodeBase58(&rand_pwd[0],&rand_pwd[0]+32)),
                 "", CClientUIInterface::MSG_ERROR | CClientUIInterface::SECURE);

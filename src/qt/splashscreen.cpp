@@ -26,51 +26,38 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     QWidget(0, f), curAlignment(0)
 {
     // set reference point, paddings
-    int paddingRight            = 50;
-    int paddingTop              = 50;
-    int titleVersionVSpace      = 17;
+    int paddingRight            = 0;
+    int paddingTop              = 40;
+    int titleVersionVSpace      = 30;
     int titleCopyrightVSpace    = 40;
 
-    float fontFactor            = 1.0;
+    float fontFactor            = 0.75;
     float devicePixelRatio      = 1.0;
 #if QT_VERSION > 0x050100
     devicePixelRatio = ((QGuiApplication*)QCoreApplication::instance())->devicePixelRatio();
 #endif
 
     // define text to place
-    QString titleText       = tr("HOdlcoin Core");
+    QString titleText       = tr("HashBeans Core");
     QString versionText     = QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
     QString copyrightText   = QChar(0xA9)+QString("2009-%1 ").arg(COPYRIGHT_YEAR) + QString(tr("The Bitcoin developers"));
-    QString copyrightText2  = QChar(0xA9)+QString("2017-%1 ").arg(HODL_COPYRIGHT_YEAR) + QString(tr("The HOdlcoin developers"));
+    QString copyrightText2  = QChar(0xA9)+QString("2017-%1 ").arg(HDL_COPYRIGHT_YEAR) + QString(tr("The HOdlcoin developers"));
+    QString copyrightText3  = QChar(0xA9)+QString("2024-%1 ").arg(HABS_COPYRIGHT_YEAR) + QString(tr("The HashBeans developers"));
 
     const char *inspirationals[] = {
-        "Do you even HODL?",
-        "The squirrel is the animal kingdom's natural HOdler.",
-        "The nut is the smallest unit of HODL.",
-        "There are 100,000,000 nuts in one HODL.",
-        "Help! I'm being HOdled against my will.",
-        "Plan for profit. Step 1:HODL, Step 2:HODL, Step 3:HODL",
-        "HOdl your horses.",
-        "Let us Hodl each other.",
-        "What would Jesus HOdl?",
-        "Turn on, tune in, HOdl out.",
-        "Winter is Coming.",
-        "Ask not for a lighter burden, but for broader sHOdlers.",
-        "Keep Calm and HOdl On.",
-        "Welcome to HOdl California.",
-        "HODL - rating:HODL"
+        "Nature also forges man, now a gold man, now a silver man, now a fig man, now a bean man."
     };
 
     srand(time(NULL)+clock());
     QString inspirationalText  = QString(inspirationals[rand() % 15]);
-    QString authorText = QString("                        - Nutoshi Sakamoto");
+    QString authorText = QString("- Paracelsus (Spagyrical writings)");
 
     QString titleAddText    = networkStyle->getTitleAddText();
 
     QString font            = QApplication::font().toString();
 
     // create a bitmap according to device pixelratio
-    QSize splashSize(480*devicePixelRatio,320*devicePixelRatio);
+    QSize splashSize(420*devicePixelRatio,480*devicePixelRatio);
     pixmap = QPixmap(splashSize);
 
 #if QT_VERSION > 0x050100
@@ -89,7 +76,8 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     pixPaint.fillRect(rGradient, gradient);
 
     // draw the bitcoin icon, expected size of PNG: 1024x1024
-	QRect rectIcon(QPoint(-100,-22), QSize(330,330));
+    int centerX = (splashSize.width() - 300 * devicePixelRatio) / 2;
+    QRect rectIcon(QPoint(centerX,170), QSize(300,300));
 
     const QSize requiredSize(1024,1024);
     QPixmap icon(networkStyle->getAppIcon().pixmap(requiredSize));
@@ -100,35 +88,64 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     pixPaint.setFont(QFont(font, 33*fontFactor));
     QFontMetrics fm = pixPaint.fontMetrics();
     int titleTextWidth  = fm.width(titleText);
-    if(titleTextWidth > 160) {
+    
+    //if(titleTextWidth > 160) {
         // strange font rendering, Arial probably not found
-        fontFactor = 0.75;
-    }
+    //    fontFactor = 0.75;
+    //}
 
     pixPaint.setFont(QFont(font, 33*fontFactor));
     fm = pixPaint.fontMetrics();
-    titleTextWidth  = fm.width(titleText);
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop,titleText);
+
+    int xPositionTitle = (pixmap.width() / devicePixelRatio - titleTextWidth) / 2;
+    pixPaint.drawText(xPositionTitle,paddingTop,titleText);
 
     pixPaint.setFont(QFont(font, 15*fontFactor));
 
     // if the version string is to long, reduce size
     fm = pixPaint.fontMetrics();
     int versionTextWidth  = fm.width(versionText);
-    if(versionTextWidth > titleTextWidth+paddingRight-10) {
-        pixPaint.setFont(QFont(font, 10*fontFactor));
-        titleVersionVSpace -= 5;
-    }
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight+2,paddingTop+titleVersionVSpace,versionText);
 
-    // draw copyright stuff
+    //if(versionTextWidth > titleTextWidth) {
+    //    pixPaint.setFont(QFont(font, 10*fontFactor));
+    //    titleVersionVSpace -= 5;
+    //}
+
+    int xPositionVersion = (pixmap.width() / devicePixelRatio - versionTextWidth) / 2;
+    pixPaint.drawText(xPositionVersion,paddingTop+titleVersionVSpace,versionText);
+
+
+   // draw copyright stuff
     pixPaint.setFont(QFont(font, 10*fontFactor));
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop+titleCopyrightVSpace,copyrightText);
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop+titleCopyrightVSpace+12,copyrightText2);
+    fm = pixPaint.fontMetrics();
 
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop+titleCopyrightVSpace+86,inspirationalText);
-    pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop+titleCopyrightVSpace+106,authorText);
+    int copyrightWidth  = fm.width(copyrightText);
+    int xPositionCopyright = (pixmap.width() / devicePixelRatio - copyrightWidth) / 2;
+    int copyrightWidth2  = fm.width(copyrightText2);
+    int xPositionCopyright2 = (pixmap.width() / devicePixelRatio - copyrightWidth2) / 2;
+    int copyrightWidth3  = fm.width(copyrightText3);
+    int xPositionCopyright3 = (pixmap.width() / devicePixelRatio - copyrightWidth3) / 2;
 
+    pixPaint.drawText(xPositionCopyright,paddingTop+titleCopyrightVSpace+12,copyrightText);
+    pixPaint.drawText(xPositionCopyright2,paddingTop+titleCopyrightVSpace+24,copyrightText2);
+    pixPaint.drawText(xPositionCopyright3,paddingTop+titleCopyrightVSpace+36,copyrightText3);
+
+    if (fm.width(inspirationalText) > pixmap.width()) {
+        pixPaint.setFont(QFont(font, 8*fontFactor));
+    }
+
+    int inspirationalTextY = paddingTop + titleCopyrightVSpace + 80; // 60px distance from copyright stuff
+    int authorTextY = inspirationalTextY + fm.height() + 30; // 20px distance from inspirational text / quote
+
+    int inspirationalWidth  = fm.width(inspirationalText);
+    int xPositionInspirational = (pixmap.width() / devicePixelRatio - inspirationalWidth) / 2;
+
+    int authorWidth  = fm.width(authorText);
+    int xPositionAuthor = (pixmap.width() / devicePixelRatio - authorWidth) / 2;
+    //draw quote
+
+    pixPaint.drawText(xPositionInspirational,paddingTop+titleCopyrightVSpace+68,inspirationalText);
+    pixPaint.drawText(xPositionAuthor,paddingTop+titleCopyrightVSpace+88,authorText);
 
     // draw additional text if special network
     if(!titleAddText.isEmpty()) {

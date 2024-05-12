@@ -17,9 +17,9 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(HODL);
-    unitlist.append(mHODL);
-    unitlist.append(uHODL);
+    unitlist.append(HABS);
+    unitlist.append(mHABS);
+    unitlist.append(uHABS);
     return unitlist;
 }
 
@@ -27,9 +27,9 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case HODL:
-    case mHODL:
-    case uHODL:
+    case HABS:
+    case mHABS:
+    case uHABS:
         return true;
     default:
         return false;
@@ -40,9 +40,9 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case HODL: return QString("HODL");
-    case mHODL: return QString("mHODL");
-    case uHODL: return QString::fromUtf8("μHODL");
+    case HABS: return QString("HABS");
+    case mHABS: return QString("mHABS");
+    case uHABS: return QString::fromUtf8("μHABS");
     default: return QString("???");
     }
 }
@@ -51,9 +51,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case HODL: return QString("HOdlcoins");
-    case mHODL: return QString("Milli-HOdlcoins (1 / 1" THIN_SP_UTF8 "000)");
-    case uHODL: return QString("Micro-HOdlcoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case HABS: return QString("HashBeans");
+    case mHABS: return QString("Milli-HashBeans (1 / 1" THIN_SP_UTF8 "000)");
+    case uHABS: return QString("Micro-HashBeans (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
@@ -62,9 +62,9 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case HODL:  return 100000000;
-    case mHODL: return 100000;
-    case uHODL: return 100;
+    case HABS:  return 100000000;
+    case mHABS: return 100000;
+    case uHABS: return 100;
     default:   return 100000000;
     }
 }
@@ -73,9 +73,9 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case HODL: return 8;
-    case mHODL: return 5;
-    case uHODL: return 2;
+    case HABS: return 8;
+    case mHABS: return 5;
+    case uHABS: return 2;
     default: return 0;
     }
 }

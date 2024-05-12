@@ -160,8 +160,8 @@
         <translation>Bekreft kryptering av lommebok</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HODLCOINS&lt;/b&gt;!</source>
-        <translation>Advarsel: Hvis du krypterer lommeboken og mister adgangsfrasen, så vil du &lt;b&gt;MISTE ALLE DINE HODLCOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HABSCOINS&lt;/b&gt;!</source>
+        <translation>Advarsel: Hvis du krypterer lommeboken og mister adgangsfrasen, så vil du &lt;b&gt;MISTE ALLE DINE HABSCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -391,8 +391,8 @@
         <translation>Bitcoin Core</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and hodlcoin: URIs)</source>
-        <translation>Forespør betalinger (genererer QR-koder og hodlcoin: URIer)</translation>
+        <source>Request payments (generates QR codes and hashbeans: URIs)</source>
+        <translation>Forespør betalinger (genererer QR-koder og hashbeans: URIer)</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
@@ -411,7 +411,7 @@
         <translation>Vis listen over bruke mottaksadresser og merkelapper</translation>
     </message>
     <message>
-        <source>Open a hodlcoin: URI or payment request</source>
+        <source>Open a hashbeans: URI or payment request</source>
         <translation>Åpne en Bitcoin: URI eller betalingsetterspørring</translation>
     </message>
     <message>
@@ -1247,7 +1247,7 @@
         <translation>Betalingsetterspørringsfeil</translation>
     </message>
     <message>
-        <source>Cannot start hodlcoin: click-to-pay handler</source>
+        <source>Cannot start hashbeans: click-to-pay handler</source>
         <translation>Kan ikke starte Bitcoin: klikk-og-betal håndterer</translation>
     </message>
     <message>
@@ -2126,7 +2126,7 @@
         <translation>Skriv inn en merkelapp for denne adressen for å legge den til listen av brukte adresser</translation>
     </message>
     <message>
-        <source>A message that was attached to the hodlcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <source>A message that was attached to the hashbeans: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
         <translation>En melding som var tilknyttet bitcoinen: URI vil bli lagret med transaksjonen for din oversikt. Denne meldingen vil ikke bli sendt over Bitcoin-nettverket.</translation>
     </message>
     <message>

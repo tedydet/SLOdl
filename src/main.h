@@ -48,7 +48,7 @@ class CValidationState;
 
 struct CNodeStateStats;
 
-// static int MINERHODLINGPERIOD=561*365;
+// static int MINERHABSINGPERIOD=561*365;
 
 /** Default for -blockmaxsize and -blockminsize, which control the range of sizes the mining code will create **/
 static const unsigned int DEFAULT_BLOCK_MAX_SIZE = 750000;

@@ -13,7 +13,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"org.hodlcoinfoundation.HOdlcoin-Qt";
+        return @"org.hashbeansfoundation.HashBeans-Qt";
     } else {
         return [self __bundleIdentifier];
     }

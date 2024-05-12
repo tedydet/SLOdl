@@ -5,5 +5,5 @@ clean: FORCE
 	$(MAKE) -C .. bitcoin_qt_clean test_bitcoin_qt_clean
 check: FORCE
 	$(MAKE) -C .. test_bitcoin_qt_check
-hodlcoin-qt hodlcoin-qt.exe: FORCE
-         $(MAKE) -C .. hodlcoin_qt
+hashbeans-qt hashbeans-qt.exe: FORCE
+         $(MAKE) -C .. hashbeans_qt

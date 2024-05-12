@@ -264,11 +264,11 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
                     ss <<"!!!!!WARNING: There is no interest rate advantage of using a Term Deposit for a period of more than 204,765 blocks. It is recommended that you cancel this transaction. ";
                 }
                 ss <<"Term Deposit Instruction Detected: ";
-                ss <<"This will send the amount of " << (0.0+rcp.amount)/COIN <<" HODL ";
+                ss <<"This will send the amount of " << (0.0+rcp.amount)/COIN <<" HABS ";
                 ss <<"to be locked for " << termDepositLength << " blocks. ";
                 ss <<"This is approximately " << (0.0+termDepositLength)/(561) << " days. ";
                 CAmount withInterest=GetInterest(rcp.amount, chainActive.Height()+1, chainActive.Height()+1+termDepositLength, chainActive.Height()+1+termDepositLength);
-                ss <<"Upon maturation, it will be worth " << (0.0+withInterest)/COIN << " HODL. ";
+                ss <<"Upon maturation, it will be worth " << (0.0+withInterest)/COIN << " HABS. ";
                 CAmount interestOnly=withInterest-rcp.amount;
                 double interestRateForTime=(0.0+interestOnly)/(rcp.amount);
                 double fractionOfaYear=204765.0/termDepositLength;
@@ -361,7 +361,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction &tran
                 rcp.paymentRequest.SerializeToString(&value);
                 newTx->vOrderForm.push_back(make_pair(key, value));
             }
-            else if (!rcp.message.isEmpty()) // Message from normal hodlcoin:URI (hodlcoin:123...?message=example)
+            else if (!rcp.message.isEmpty()) // Message from normal hashbeans:URI (hashbeans:123...?message=example)
                 newTx->vOrderForm.push_back(make_pair("Message", rcp.message.toStdString()));
         }
 

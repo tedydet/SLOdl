@@ -793,7 +793,7 @@ void DepositCoinsDialog::coinControlChangeEdited(const QString& text)
         }
         else if (!addr.IsValid()) // Invalid address
         {
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid HOdlcoin address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid HashBeans address"));
         }
         else // Valid address
         {

@@ -62,15 +62,15 @@ bin_PROGRAMS =
 TESTS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += hodlcoind
+  bin_PROGRAMS += hashbeansd
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += hodlcoin-cli hodlcoin-tx
+  bin_PROGRAMS += hashbeans-cli hashbeans-tx
 endif
 
 .PHONY: FORCE
-# hodlcoin core #
+# hashbeans core #
 BITCOIN_CORE_H = \
   addrman.h \
   aligned_malloc.h \
@@ -179,7 +179,7 @@ obj/build.h: FORCE
 	  $(abs_top_srcdir)
 libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between hodlcoind and hodlcoin-qt
+# server: shared between hashbeansd and hashbeans-qt
 libbitcoin_server_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS)
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
@@ -210,7 +210,7 @@ libbitcoin_server_a_SOURCES = \
   $(JSON_H) \
   $(BITCOIN_CORE_H)
 
-# wallet: shared between hodlcoind and hodlcoin-qt, but only linked
+# wallet: shared between hashbeansd and hashbeans-qt, but only linked
 # when wallet enabled
 libbitcoin_wallet_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_wallet_a_SOURCES = \
@@ -253,7 +253,7 @@ libbitcoin_crypto_x86_a_SOURCES = \
   aes.cpp \
   sha512.cpp
 
-# common: shared between hodlcoind, and hodlcoin-qt and non-server tools
+# common: shared between hashbeansd, and hashbeans-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_common_a_SOURCES = \
   amount.cpp \
@@ -312,7 +312,7 @@ if GLIBC_BACK_COMPAT
 libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
 endif
 
-# cli: shared between hodlcoin-cli and hodlcoin-qt
+# cli: shared between hashbeans-cli and hashbeans-qt
 libbitcoin_cli_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_cli_a_SOURCES = \
   rpcclient.cpp \
@@ -321,16 +321,16 @@ libbitcoin_cli_a_SOURCES = \
 nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# hodlcoind binary #
-hodlcoind_SOURCES = bitcoind.cpp
-hodlcoind_CPPFLAGS = $(BITCOIN_INCLUDES)
-hodlcoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# hashbeansd binary #
+hashbeansd_SOURCES = bitcoind.cpp
+hashbeansd_CPPFLAGS = $(BITCOIN_INCLUDES)
+hashbeansd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-hodlcoind_SOURCES += bitcoind-res.rc
+hashbeansd_SOURCES += bitcoind-res.rc
 endif
 
-hodlcoind_LDADD = \
+hashbeansd_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UNIVALUE) \
@@ -342,38 +342,38 @@ hodlcoind_LDADD = \
   $(LIBSECP256K1)
 
 if ENABLE_WALLET
-hodlcoind_LDADD += libbitcoin_wallet.a
+hashbeansd_LDADD += libbitcoin_wallet.a
 endif
 
-hodlcoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
+hashbeansd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
 #
 
-# hodlcoin-cli binary #
-hodlcoin_cli_SOURCES = bitcoin-cli.cpp
-hodlcoin_cli_CPPFLAGS = $(BITCOIN_INCLUDES)
-hodlcoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# hashbeans-cli binary #
+hashbeans_cli_SOURCES = bitcoin-cli.cpp
+hashbeans_cli_CPPFLAGS = $(BITCOIN_INCLUDES)
+hashbeans_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-hodlcoin_cli_SOURCES += bitcoin-cli-res.rc
+hashbeans_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-hodlcoin_cli_LDADD = \
+hashbeans_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBBITCOIN_UTIL)
 
-hodlcoin_cli_LDADD += $(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS)
+hashbeans_cli_LDADD += $(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS)
 #
 
-# hodlcoin-tx binary #
-hodlcoin_tx_SOURCES = bitcoin-tx.cpp
-hodlcoin_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
-hodlcoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# hashbeans-tx binary #
+hashbeans_tx_SOURCES = bitcoin-tx.cpp
+hashbeans_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
+hashbeans_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-hodlcoin_tx_SOURCES += bitcoin-tx-res.rc
+hashbeans_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-hodlcoin_tx_LDADD = \
+hashbeans_tx_LDADD = \
   $(LIBBITCOIN_UNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -381,7 +381,7 @@ hodlcoin_tx_LDADD = \
   $(LIBBITCOIN_CRYPTO_X86) \
   $(LIBSECP256K1)
 
-hodlcoin_tx_LDADD += $(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) $(CRYPTO_LIBS)
+hashbeans_tx_LDADD += $(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #

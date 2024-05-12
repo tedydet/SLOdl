@@ -27,7 +27,7 @@ class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 public:
-    TxViewDelegate(): QAbstractItemDelegate(), unit(BitcoinUnits::HODL)
+    TxViewDelegate(): QAbstractItemDelegate(), unit(BitcoinUnits::HABS)
     {
 
     }
@@ -176,20 +176,20 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     bool showWatchOnlyImmature = watchImmatureBalance != 0;
 
     // Fetch sort flag
-    bool sort_flag = GetArg("-sorthodlings", true);
-    LogPrintf("sort hodlings flag = %b\n", sort_flag);
+    bool sort_flag = GetArg("-sorthabsings", true);
+    LogPrintf("sort habsings flag = %b\n", sort_flag);
 
     // for symmetry reasons also show immature label when the watch-only one is shown
     ui->labelImmature->setVisible(showImmature || showWatchOnlyImmature);
     ui->labelImmatureText->setVisible(showImmature || showWatchOnlyImmature);
     ui->labelWatchImmature->setVisible(showWatchOnlyImmature); // show watch-only immature balance
 
-    //ui->hodlTable->setRowCount(termDepositInfo.size());
+    //ui->habsTable->setRowCount(termDepositInfo.size());
 
     // actually update labels
-    //int nDisplayUnit = BitcoinUnits::HODL;
+    //int nDisplayUnit = BitcoinUnits::HABS;
     // Disable sorting outside the for loop 
-    //ui->hodlTable->setSortingEnabled(false);
+    //ui->habsTable->setSortingEnabled(false);
     
     //uint64_t totalLocked  = 0;
     //uint64_t totalAccrued = 0;
@@ -211,26 +211,26 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     //    double interestRate=(pow(interestRatePerBlock,365*561)-1)*100;
         
     //    if(curHeight>=releaseBlock){
-    //        ui->hodlTable->setItem(i, 0, new QTableWidgetItem(QString("Matured (Warning: this amount is no longer earning interest of any kind)")));
+    //        ui->habsTable->setItem(i, 0, new QTableWidgetItem(QString("Matured (Warning: this amount is no longer earning interest of any kind)")));
     //        totalMatured += matureValue;
     //    }else{
-    //        ui->hodlTable->setItem(i, 0, new QTableWidgetItem(QString("HOdled")));
+    //        ui->habsTable->setItem(i, 0, new QTableWidgetItem(QString("HOdled")));
     //        totalAccrued += (withInterest-termDeposit.nValue);
     //	    totalLocked  += termDeposit.nValue;
     //    }
 
-    //    ui->hodlTable->setItem(i, 1, new QTableWidgetItem(BitcoinUnits::format(nDisplayUnit, termDeposit.nValue)));
-    //    ui->hodlTable->setItem(i, 2, new QTableWidgetItem(BitcoinUnits::format(nDisplayUnit, withInterest-termDeposit.nValue)));
-    //    ui->hodlTable->setItem(i, 3, new QTableWidgetItem(BitcoinUnits::format(nDisplayUnit, withInterest)));
-    //    ui->hodlTable->setItem(i, 4, new QTableWidgetItem(BitcoinUnits::format(nDisplayUnit, matureValue)));
-    //    ui->hodlTable->setItem(i, 5, new QTableWidgetItem(QString::number((term)/561)));
+    //    ui->habsTable->setItem(i, 1, new QTableWidgetItem(BitcoinUnits::format(nDisplayUnit, termDeposit.nValue)));
+    //    ui->habsTable->setItem(i, 2, new QTableWidgetItem(BitcoinUnits::format(nDisplayUnit, withInterest-termDeposit.nValue)));
+    //    ui->habsTable->setItem(i, 3, new QTableWidgetItem(BitcoinUnits::format(nDisplayUnit, withInterest)));
+    //    ui->habsTable->setItem(i, 4, new QTableWidgetItem(BitcoinUnits::format(nDisplayUnit, matureValue)));
+    //    ui->habsTable->setItem(i, 5, new QTableWidgetItem(QString::number((term)/561)));
 
     //    if(!sort_flag){
-    //        ui->hodlTable->setItem(i, 6, new QTableWidgetItem(QString::number(lockHeight)));
-    //        ui->hodlTable->setItem(i, 7, new QTableWidgetItem(QString::number(releaseBlock)));
+    //        ui->habsTable->setItem(i, 6, new QTableWidgetItem(QString::number(lockHeight)));
+    //        ui->habsTable->setItem(i, 7, new QTableWidgetItem(QString::number(releaseBlock)));
     //    }else{
-    //        ui->hodlTable->setItem(i, 6, new QTableWidgetItem(QString::number(lockHeight).rightJustified(7,'0')));
-    //        ui->hodlTable->setItem(i, 7, new QTableWidgetItem(QString::number(releaseBlock).rightJustified(7,'0')));
+    //        ui->habsTable->setItem(i, 6, new QTableWidgetItem(QString::number(lockHeight).rightJustified(7,'0')));
+    //        ui->habsTable->setItem(i, 7, new QTableWidgetItem(QString::number(releaseBlock).rightJustified(7,'0')));
     //    }
 
     //    time_t rawtime;
@@ -242,7 +242,7 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     //    strftime(buffer,80,"%Y/%m/%d",timeinfo);
     //    std::string str(buffer);
 
-    //    ui->hodlTable->setItem(i, 8, new QTableWidgetItem(QString(buffer)));
+    //    ui->habsTable->setItem(i, 8, new QTableWidgetItem(QString(buffer)));
     //}
    
     //ui->labellocked->setText(BitcoinUnits::formatWithUnit(unit, totalLocked, false, BitcoinUnits::separatorAlways));
@@ -250,7 +250,7 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     //ui->labelMatured->setText(BitcoinUnits::formatWithUnit(unit, totalMatured, false, BitcoinUnits::separatorAlways));
  
     //if(sort_flag){
-    // ui->hodlTable->setSortingEnabled(true);
+    // ui->habsTable->setSortingEnabled(true);
     //}
 }
 
@@ -306,7 +306,7 @@ void OverviewPage::setWalletModel(WalletModel *model)
         connect(model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("HODL")
+    // update the display unit, to not use the default ("HABS")
     updateDisplayUnit();
 }
 

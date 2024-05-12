@@ -144,8 +144,8 @@
         <translation>Apstiprināt maciņa šifrēšanu</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HODLCOINS&lt;/b&gt;!</source>
-        <translation>Brīdinājums: Ja tu nošifrē savu maciņu un pazaudē paroli, tu &lt;b&gt;PAZAUDĒSI VISAS SAVAS HODLCOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HABSCOINS&lt;/b&gt;!</source>
+        <translation>Brīdinājums: Ja tu nošifrē savu maciņu un pazaudē paroli, tu &lt;b&gt;PAZAUDĒSI VISAS SAVAS HABSCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -359,15 +359,15 @@
         <translation>Bitcoin Core</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and hodlcoin: URIs)</source>
-        <translation>Pieprasīt maksājumus (izveido QR kodu un hodlcoin: URIs)</translation>
+        <source>Request payments (generates QR codes and hashbeans: URIs)</source>
+        <translation>Pieprasīt maksājumus (izveido QR kodu un hashbeans: URIs)</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
         <translation>Par &amp;Bitcoin Core</translation>
     </message>
     <message>
-        <source>Open a hodlcoin: URI or payment request</source>
+        <source>Open a hashbeans: URI or payment request</source>
         <translation>Atvērt bitcoin URI vai maksājuma pieprasījumu</translation>
     </message>
     <message>
@@ -949,7 +949,7 @@
         <translation>Maksājumu pieprasījuma kļūda</translation>
     </message>
     <message>
-        <source>Cannot start hodlcoin: click-to-pay handler</source>
+        <source>Cannot start hashbeans: click-to-pay handler</source>
         <translation>Nevar palaist Bitcoin: nospied-lai-maksātu apstrādātāju</translation>
     </message>
     <message>

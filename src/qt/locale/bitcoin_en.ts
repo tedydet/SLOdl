@@ -201,8 +201,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HODLCOINS&lt;/b&gt;!</source>
-        <translation>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HODLCOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HABSCOINS&lt;/b&gt;!</source>
+        <translation>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HABSCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -497,7 +497,7 @@
     </message>
     <message>
         <location line="+164"/>
-        <source>Request payments (generates QR codes and hodlcoin: URIs)</source>
+        <source>Request payments (generates QR codes and hashbeans: URIs)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -522,7 +522,7 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>Open a hodlcoin: URI or payment request</source>
+        <source>Open a hashbeans: URI or payment request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1595,7 +1595,7 @@
     </message>
     <message>
         <location line="-408"/>
-        <source>Cannot start hodlcoin: click-to-pay handler</source>
+        <source>Cannot start hashbeans: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2732,7 +2732,7 @@
     </message>
     <message>
         <location line="+47"/>
-        <source>A message that was attached to the hodlcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <source>A message that was attached to the hashbeans: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

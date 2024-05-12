@@ -6,8 +6,9 @@ define(_CLIENT_VERSION_REVISION, 2)
 define(_CLIENT_VERSION_BUILD, 0)
 define(_CLIENT_VERSION_IS_RELEASE, false)
 define(_COPYRIGHT_YEAR, 2018)
-define(_HODL_COPYRIGHT_YEAR, 2019)
-AC_INIT([HOdlcoin Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/HOdlcoin/HOdlcoin/issues],[hodlcoin])
+define(_HDL_COPYRIGHT_YEAR, 2019)
+define(_HABS_COPYRIGHT_YEAR, 2024)
+AC_INIT([HashBeans Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[https://github.com/HashBeans/HashBeans/issues],[hashbeans])
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -174,7 +175,7 @@ CPPFLAGS="$CPPFLAGS -DBOOST_SPIRIT_THREADSAFE -DHAVE_BUILD_INFO -D__STDC_FORMAT_
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build bitcoin-cli hodlcoin-tx (default=yes)])],
+  [build bitcoin-cli hashbeans-tx (default=yes)])],
   [build_bitcoin_utils=$withval],
   [build_bitcoin_utils=yes])
 
@@ -723,11 +724,11 @@ LIBS="$LIBS_TEMP"
 
 BITCOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 
-AC_MSG_CHECKING([whether to build hodlcoind])
+AC_MSG_CHECKING([whether to build hashbeansd])
 AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
 AC_MSG_RESULT($build_bitcoind)
 
-AC_MSG_CHECKING([whether to build utils (hodlcoin-cli hodlcoin-tx)])
+AC_MSG_CHECKING([whether to build utils (hashbeans-cli hashbeans-tx)])
 AM_CONDITIONAL([BUILD_BITCOIN_UTILS], [test x$build_bitcoin_utils = xyes])
 AC_MSG_RESULT($build_bitcoin_utils)
 
@@ -828,7 +829,7 @@ if test x$bitcoin_enable_qt != xno; then
     AC_MSG_WARN("xgettext is required to update qt translations")
   fi
 
-  AC_MSG_CHECKING([whether to build test_hodlcoin-qt])
+  AC_MSG_CHECKING([whether to build test_hashbeans-qt])
   if test x$use_gui_tests$bitcoin_enable_qt_test = xyesyes; then
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
@@ -837,7 +838,7 @@ if test x$bitcoin_enable_qt != xno; then
   fi
 fi
 
-AC_MSG_CHECKING([whether to build test_hodlcoin])
+AC_MSG_CHECKING([whether to build test_hashbeans])
 if test x$use_tests = xyes; then
   AC_MSG_RESULT([yes])
   BUILD_TEST="yes"
@@ -876,15 +877,16 @@ AC_DEFINE(CLIENT_VERSION_REVISION, _CLIENT_VERSION_REVISION, [Build revision])
 AC_DEFINE(CLIENT_VERSION_BUILD, _CLIENT_VERSION_BUILD, [Version Build])
 AC_DEFINE(CLIENT_VERSION_IS_RELEASE, _CLIENT_VERSION_IS_RELEASE, [Version is release])
 AC_DEFINE(COPYRIGHT_YEAR, _COPYRIGHT_YEAR, [Version is release])
-AC_DEFINE(HODL_COPYRIGHT_YEAR, _HODL_COPYRIGHT_YEAR, [Version is release])
+AC_DEFINE(HDL_COPYRIGHT_YEAR, _HDL_COPYRIGHT_YEAR, [Version is release])
+AC_DEFINE(HABS_COPYRIGHT_YEAR, _HABS_COPYRIGHT_YEAR, [Version is release])
 AC_SUBST(CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MAJOR)
 AC_SUBST(CLIENT_VERSION_MINOR, _CLIENT_VERSION_MINOR)
 AC_SUBST(CLIENT_VERSION_REVISION, _CLIENT_VERSION_REVISION)
 AC_SUBST(CLIENT_VERSION_BUILD, _CLIENT_VERSION_BUILD)
 AC_SUBST(CLIENT_VERSION_IS_RELEASE, _CLIENT_VERSION_IS_RELEASE)
 AC_SUBST(COPYRIGHT_YEAR, _COPYRIGHT_YEAR)
-AC_SUBST(HODL_COPYRIGHT_YEAR, _HODL_COPYRIGHT_YEAR)
-
+AC_SUBST(HDL_COPYRIGHT_YEAR, _HDL_COPYRIGHT_YEAR)
+AC_SUBST(HABS_COPYRIGHT_YEAR, _HABS_COPYRIGHT_YEAR)
 
 AC_SUBST(RELDFLAGS)
 AC_SUBST(LIBTOOL_APP_LDFLAGS)
