@@ -477,29 +477,51 @@ boost::filesystem::path GetConfigFile()
     return pathConfigFile;
 }
 
+void CreateDefaultConfigFile(const boost::filesystem::path& pathConfigFile) {
+    std::ofstream configFile(pathConfigFile.string().c_str());
+    configFile << "# HashBeans Configuration File\n\n"
+               << "# server=1 tells HashBeans-Qt and hashbeansd to accept JSON-RPC commands, required for solo mining using hodlminer.\n"
+               << "server=1\n\n"
+               << "rpcuser=user\n"
+               << "rpcpassword=password\n"
+               << "rpcport=3376\n"
+               << "rpcallowip=127.0.0.1\n\n"
+               << "# in-wallet miner options\n"
+               << "optimineraes=1			# AES activated\n"
+               << "optimineravx2=0			# Change this to 1 for Intel CPUs, AMD CPUs may crash.\n"
+               << "minermemory=1			# 1 GB of RAM used; 2 is typically not faster than one.\n"
+               << "genproclimit=8			# number of threads per 1 GB RAM allocated\n"
+			   << "#miningaddress=\"address\"	# Uncomment and add a specific mining address if you want to mine to a single address using the in-wallet miner.\n\n"
+               << "# Add your preferred nodes here:\n"
+			   << "#addnode=192.168.178.24";
+    configFile.close();
+}
+
 void ReadConfigFile(map<string, string>& mapSettingsRet,
                     map<string, vector<string> >& mapMultiSettingsRet)
 {
-    boost::filesystem::ifstream streamConfig(GetConfigFile());
-    if (!streamConfig.good())
-        return; // No hashbeans.conf file is OK
+    boost::filesystem::path configFile = GetConfigFile();
+    if (!boost::filesystem::exists(configFile)) {
+        // Create config file with default settings
+        CreateDefaultConfigFile(configFile);
+    }
+
+    boost::filesystem::ifstream streamConfig(configFile);
+    if (!streamConfig.good()) return; // File might not be readable yet.
 
     set<string> setOptions;
     setOptions.insert("*");
 
-    for (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it)
-    {
-        // Don't overwrite existing settings so command line settings override hashbeans.conf
+    for (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it) {
+        // add additional options
         string strKey = string("-") + it->string_key;
-        if (mapSettingsRet.count(strKey) == 0)
-        {
+        if (mapSettingsRet.count(strKey) == 0) {
             mapSettingsRet[strKey] = it->value[0];
-            // interpret nofoo=1 as foo=0 (and nofoo=0 as foo=1) as long as foo not set)
             InterpretNegativeSetting(strKey, mapSettingsRet);
         }
         mapMultiSettingsRet[strKey].push_back(it->value[0]);
     }
-    // If datadir is changed in .conf file:
+
     ClearDatadirCache();
 }
 
