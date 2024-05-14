@@ -122,15 +122,11 @@ public:
 
         assert(consensus.hashGenesisBlock == uint256S("00002faf3fb41b5f8f2ac542da50e7691bb07f905f6a30ff6279536958e8a7bb"));
         assert(genesis.hashMerkleRoot == uint256S("93a83264288b7f4982d73b80112a00bfcd3e06e60dabf081d83d5180d2b548fc"));
-	//printf("Mainnet genesis block verified. \n");
+		//printf("Mainnet genesis block verified. \n");
 
-	vFixedSeeds.clear();
-        vSeeds.clear();
-        //vSeeds.push_back(CDNSSeedData("westcoast.hashbeans.com", "westcoast.hashbeans.com")); //West Coast
-
-<<<<<<< HEAD
-=======
-
+	    //vFixedSeeds.clear();
+        //vSeeds.clear();
+        
         vSeeds.push_back(CDNSSeedData("westcoast.hodlcoin.com", "westcoast.hodlcoin.com")); //West Coast
         vSeeds.push_back(CDNSSeedData("eastcoast.hodlcoin.com", "eastcoast.hodlcoin.com"));//East Coast
         vSeeds.push_back(CDNSSeedData("europe.hodlcoin.com", "europe.hodlcoin.com")); //Europe
@@ -141,7 +137,6 @@ public:
         vSeeds.push_back(CDNSSeedData("hodlcoin.fi", "seed.hodlcoin.fi"));//Canada, DNS seed, Orava
         vSeeds.push_back(CDNSSeedData("hodlcoin.com", "seed.hodlcoin.com"));//For Future allocation
 
->>>>>>> 27d0cf5c (fix high cpu-usage of hasbeansd)
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,10);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,25+128);
@@ -197,12 +192,7 @@ public:
         genesis.nStartLocation = 211580;
         genesis.nFinalCalculation = 3195160961;
 
-<<<<<<< HEAD
-        if(false && genesis.GetHash() != uint256S("0000163cdef2334bcd36c265d87c4a870db5f7135ce46a8809210bd665239bf1") ){
-=======
-
         if(genesis.GetHash() != uint256S("0000163cdef2334bcd36c265d87c4a870db5f7135ce46a8809210bd665239bf1") ){
->>>>>>> 27d0cf5c (fix high cpu-usage of hasbeansd)
             arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
             uint256 thash;
             char *scratchpad;
@@ -233,12 +223,12 @@ public:
         }
         consensus.hashGenesisBlock = genesis.GetHash();
 
-	//assert(consensus.hashGenesisBlock == genesis.GetHash())
+		//assert(consensus.hashGenesisBlock == genesis.GetHash())
         //printf("genesis.GetHash() = %s \n", genesis.GetHash().ToString().c_str());
         //printf("genesis.hashMerkleRoot = %s \n", genesis.hashMerkleRoot.ToString().c_str());
 
-	assert(consensus.hashGenesisBlock == uint256S("0000163cdef2334bcd36c265d87c4a870db5f7135ce46a8809210bd665239bf1"));
-	//printf("Testnet genesis block verified. \n");
+		assert(consensus.hashGenesisBlock == uint256S("0000163cdef2334bcd36c265d87c4a870db5f7135ce46a8809210bd665239bf1"));
+		//printf("Testnet genesis block verified. \n");
 
         //assert(consensus.hashGenesisBlock == uint256S("0x000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"));
 
@@ -330,11 +320,11 @@ public:
             consensus.hashGenesisBlock=genesis.GetHash();
         }
 
-	//assert(consensus.hashGenesisBlock == genesis.GetHash());
+		//assert(consensus.hashGenesisBlock == genesis.GetHash());
         //printf("genesis.GetHash() = %s \n", genesis.GetHash().ToString().c_str());
         //printf("genesis.hashMerkleRoot = %s \n", genesis.hashMerkleRoot.ToString().c_str());
 
-	consensus.hashGenesisBlock = genesis.GetHash();
+		consensus.hashGenesisBlock = genesis.GetHash();
         //assert(consensus.hashGenesisBlock == uint256S("001bd2a5fa3104b924919b01ecfb5e6edb3723010951b40f42a5b491fa93db07"));
 
         vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
