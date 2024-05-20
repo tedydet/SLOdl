@@ -488,9 +488,8 @@ void CreateDefaultConfigFile(const boost::filesystem::path& pathConfigFile) {
                << "rpcallowip=127.0.0.1\n\n"
                << "# in-wallet miner options\n"
                << "optimineraes=1			# AES activated\n"
-               << "optimineravx2=0			# Change this to 1 for Intel CPUs, AMD CPUs may crash.\n"
                << "minermemory=1			# 1 GB of RAM used; 2 is typically not faster than one.\n"
-               << "genproclimit=8			# number of threads per 1 GB RAM allocated\n"
+               << "genproclimit=4			# number of threads per 1 GB RAM allocated\n"
 			   << "#miningaddress=\"address\"	# Uncomment and add a specific mining address if you want to mine to a single address using the in-wallet miner.\n\n"
                << "# Add your preferred nodes here:\n"
 			   << "#addnode=192.168.178.24";

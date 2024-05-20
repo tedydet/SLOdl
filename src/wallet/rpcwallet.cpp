@@ -348,7 +348,7 @@ Value getaddressesbyaccount(const Array& params, bool fHelp)
     return ret;
 }
 
-static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtractFeeFromAmount, CWalletTx& wtxNew, int termDepositLength)
+static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtractFeeFromAmount, CWalletTx& wtxNew)
 {
     CAmount curBalance = pwalletMain->GetBalance();
 
@@ -357,20 +357,20 @@ static void SendMoney(const CTxDestination &address, CAmount nValue, bool fSubtr
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid amount");
 
     // Check termDepositLength , 0 means NO TERM DEPOSITS
-    if (termDepositLength < 0)
-       throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid termDepositLength");
+    // if (termDepositLength < 0)
+    //   throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid termDepositLength");
 
     if (nValue > curBalance)
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Insufficient funds");
 
     // Parse Bitcoin address
     CScript scriptPubKey;
-    if (termDepositLength == 0)
+    //if (termDepositLength == 0)
 	scriptPubKey = GetScriptForDestination(address);
-    else
-    {
-        scriptPubKey = GetTimeLockScriptForDestination(address, chainActive.Height()+1+termDepositLength);
-    }
+    //else
+    //{
+    //    scriptPubKey = GetTimeLockScriptForDestination(address, chainActive.Height()+1+termDepositLength);
+    //}
 
     // Create and send the transaction
     CReserveKey reservekey(pwalletMain);
@@ -439,12 +439,13 @@ Value sendtoaddress(const Array& params, bool fHelp)
         fSubtractFeeFromAmount = params[4].get_bool();
 
     EnsureWalletIsUnlocked();
-
-    SendMoney(address.Get(), nAmount, fSubtractFeeFromAmount, wtx, 0);
+	
+	SendMoney(address.Get(), nAmount, fSubtractFeeFromAmount, wtx);
+    //SendMoney(address.Get(), nAmount, fSubtractFeeFromAmount, wtx, 0);
 
     return wtx.GetHash().GetHex();
 }
-
+/*
 Value deposittoaddress(const Array& params, bool fHelp)
 {
     if (!EnsureWalletIsAvailable(fHelp))
@@ -577,7 +578,7 @@ Value listtermdeposits(const Array &params, bool fHelp)
 
     return ret;
 }
-
+*/
 
 Value listaddressgroupings(const Array& params, bool fHelp)
 {
@@ -1051,8 +1052,8 @@ Value sendfrom(const Array& params, bool fHelp)
     if (nAmount > nBalance)
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Account has insufficient funds");
 
-    SendMoney(address.Get(), nAmount, false, wtx, 0);
-
+    //SendMoney(address.Get(), nAmount, false, wtx, 0);
+	SendMoney(address.Get(), nAmount, false, wtx);
     return wtx.GetHash().GetHex();
 }
 
@@ -1474,10 +1475,11 @@ void ListTransactions(const CWalletTx& wtx, const string& strAccount, int nMinDe
                     entry.push_back(Pair("involvesWatchonly", true));
                 entry.push_back(Pair("account", account));
                 MaybePushAddress(entry, r.destination);
-                if (wtx.GetImmatureTermDepositCredit()>0){
-                    entry.push_back(Pair("category", "habs"));
-                }
-                else if(wtx.IsCoinBase())
+                //if (wtx.GetImmatureTermDepositCredit()>0){
+                //    entry.push_back(Pair("category", "habs"));
+                //}
+                //else if(wtx.IsCoinBase())
+				if(wtx.IsCoinBase())	
                 {
                     if (wtx.GetDepthInMainChain() < 1)
                         entry.push_back(Pair("category", "orphan"));
