@@ -965,8 +965,9 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     string rateData=initRateTable();
     const std::vector<unsigned char> data2(rateData.begin(), rateData.end());
     int rateDataHash=MurmurHash3(1989,data2);
+	//printf("Rate Data Hash=%d\n",rateDataHash);
     LogPrintf("Rate Data Hash=%d\n",rateDataHash);
-    assert(rateDataHash==-1414514366);
+    assert(rateDataHash==1075735510);
 
     CAmount principal=100*COIN;
     int ONEDAY=561;

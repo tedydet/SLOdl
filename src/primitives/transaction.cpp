@@ -162,16 +162,7 @@ static int ONEYEARPLUS1=ONEYEAR+1;
 static int TWOYEARS=ONEYEAR*2;
 
 static uint64_t rateTable[561*365+1];
-static uint64_t bonusTable[561*365+1];
 
-CAmount getBonusForAmount(int periods, CAmount theAmount){
-
-    CBigNum amount256(theAmount);
-    CBigNum rate256(bonusTable[periods]);
-    CBigNum rate0256(bonusTable[0]);
-    CBigNum result=(amount256*rate256)/rate0256;
-    return result.getuint64()-theAmount;
-}
 
 CAmount getRateForAmount(int periods, CAmount theAmount){
 
@@ -197,28 +188,27 @@ std::string initRateTable(){
 
     rateTable[0]=1;
     rateTable[0]=rateTable[0]<<62;
-    bonusTable[0]=1;
-    bonusTable[0]=bonusTable[0]<<54;
+//    bonusTable[0]=1;
+//    bonusTable[0]=bonusTable[0]<<54;
 
     //Interest rate on each block 1+(1/2^21)
     for(int i=1;i<ONEYEARPLUS1;i++){
         rateTable[i]=rateTable[i-1]+(rateTable[i-1]>>21);
-        bonusTable[i]=bonusTable[i-1]+(bonusTable[i-1]>>16); //not used
-        str += strprintf("%d %x %x\n",i,rateTable[i], bonusTable[i]);
+        //bonusTable[i]=bonusTable[i-1]+(bonusTable[i-1]>>16); //not used
+        // str += strprintf("%d %x %x\n",i,rateTable[i], bonusTable[i]);
+		str += strprintf("%d %x\n",i,rateTable[i]);
     }
 
     for(int i=0;i<ONEYEAR;i++){
-        str += strprintf("rate: %d %d %d\n",i,getRateForAmount(i,COIN*100),getBonusForAmount(i,COIN*100));
+        //str += strprintf("rate: %d %d %d\n",i,getRateForAmount(i,COIN*100),getBonusForAmount(i,COIN*100));
+		str += strprintf("rate: %d %d\n",i,getRateForAmount(i,COIN*100));
     }
 
     return str;
 }
 
 
-
-
 CAmount GetInterest(CAmount nValue, int outputBlockHeight, int valuationHeight, int maturationBlock){
-
 
 
     //These conditions generally should not occur
@@ -229,67 +219,8 @@ CAmount GetInterest(CAmount nValue, int outputBlockHeight, int valuationHeight, 
     //Regular deposits can have a maximum of 1 year of interest
     int blocks=std::min(ONEYEAR,valuationHeight-outputBlockHeight);
 
-    //Term deposits may have up to 1 year of interest
-    //if(maturationBlock>0){
-    //    blocks=std::min(ONEYEAR,valuationHeight-outputBlockHeight);
-
-        //Bug fix here - if the valuation height is greater than the maturation height, the deposit continues to earn interest after maturation
-        //Need the minimum of three figures - one year, valuation height, or maturation period
-    //    if(valuationHeight>=THEUNFORKENING){
-    //        blocks=std::min(blocks,maturationBlock-outputBlockHeight);
-            //If a user habss before is up to date with chain, the maturation date can appear in the past, causing a crash trying to calculate negative interest
-    //        blocks=std::max(blocks,0);
-    //    }
-    //}
-
     CAmount standardInterest=getRateForAmount(blocks, nValue);
-
-    //CAmount bonusAmount=0;
-    //Reward balances more in early stages
-    //if(outputBlockHeight<TWOYEARS){
-        //Calculate bonus rate based on outputBlockHeight
-    //    bonusAmount=getBonusForAmount(blocks, nValue);
-    //    CBigNum am(bonusAmount);
-    //    CBigNum fac(TWOYEARS-outputBlockHeight);
-    //    CBigNum div(TWOYEARS);
-    //    CBigNum result=((am*fac*fac*fac*fac)/(div*div*div*div));
-    //    bonusAmount=result.getuint64();
-    //}
-
-
-    //CAmount interestAmount=standardInterest+bonusAmount;
     CAmount interestAmount=standardInterest;
 
-    //CAmount termDepositAmount=0;
-
-    //Reward term deposits more
-    //if(maturationBlock>0){
-    //    int term=std::min(ONEYEAR,maturationBlock-outputBlockHeight);
-
-        //No advantage to term deposits of less than 2 days
-    //    if(term>561*2){
-    //        CBigNum am(interestAmount);
-    //        CBigNum fac(TWOYEARS-term);
-    //        CBigNum div(TWOYEARS);
-    //        CBigNum result=am - ((am*fac*fac*fac*fac*fac*fac)/(div*div*div*div*div*div));
-    //        termDepositAmount=result.getuint64();
-    //    }
-    //}
-
-    //if(outputBlockHeight>=MININGFEESFORK){
-        //If output is higher than MININGFEESFORK, simple, add bonus 
-    //    return nValue+((interestAmount+termDepositAmount)*75);    
-    //}else if(outputBlockHeight+blocks<=MININGFEESFORK){
-        //If output plus block earned interest on are lower or equal than MININGFEESFORK, simple straight interest 
-    //    return nValue+interestAmount+termDepositAmount;    
-    //}else if(outputBlockHeight<MININGFEESFORK && outputBlockHeight+blocks>MININGFEESFORK){
-        //Complex situation here. interest straddles two periods. Need to break the interest into two parts
-    //    CAmount firstPeriod = GetInterest(nValue, outputBlockHeight, MININGFEESFORK, maturationBlock)-nValue;
-    //    CAmount secondPeriod = GetInterest(nValue, MININGFEESFORK+1, valuationHeight, maturationBlock)-nValue;
-    //    return nValue+firstPeriod+secondPeriod;    
-    //}else{
-        //This should never be hit
-    //    return nValue;
-    //}
     return nValue+interestAmount;
 }

@@ -1,12 +1,12 @@
 *.tar.gz
 
 *.exe
-src/bitcoin
-src/bitcoind
-src/bitcoin-cli
-src/bitcoin-tx
-src/test/test_bitcoin
-src/qt/test/test_bitcoin-qt
+src/hashbeans
+src/hasbeansd
+src/hashbeans-cli
+src/hashbeans-tx
+src/test/test_hashbeans
+src/qt/test/test_hashbeans-qt
 
 # autoreconf
 Makefile.in
@@ -56,6 +56,7 @@ src/qt/test/moc*.cpp
 *.o-*
 *.patch
 .bitcoin
+.hashbeans
 *.a
 *.pb.cc
 *.pb.h
@@ -75,11 +76,14 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 bitcoin-qt
+hasbeans-qt
 Bitcoin-Qt.app
+HashBeans-Qt.app
 
 # Unit-tests
 Makefile.test
 bitcoin-qt_test
+hasbeans-qt_test
 src/test/buildenv.py
 
 # Resources cpp
