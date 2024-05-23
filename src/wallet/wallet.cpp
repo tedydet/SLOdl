@@ -964,6 +964,28 @@ int CWalletTx::GetRequestCount() const
     return nRequests;
 }
 
+
+CAmount CWallet::CalculateTotalInterest() {
+    CAmount totalInterest = 0;
+    std::vector<COutput> vCoins;
+    AvailableCoins(vCoins); // Diese Funktion holt alle UTXOs für das Wallet
+
+    for (const COutput& out : vCoins) {
+        if (!IsMine(out.tx->vout[out.i])) continue; // Überspringen, wenn die Ausgabe nicht zu mir gehört
+        
+        int outputBlockHeight = mapBlockIndex[out.tx->hashBlock]->nHeight;
+        int currentHeight = chainActive.Height();
+        int depth = out.tx->GetDepthInMainChain();
+
+        CAmount interest = out.tx->vout[out.i].GetValueWithInterest(currentHeight - depth, currentHeight) - out.tx->vout[out.i].nValue;
+        totalInterest += interest;
+    }
+    return totalInterest;
+}
+
+
+
+
 void CWalletTx::GetAmounts(list<COutputEntry>& listReceived,
                            list<COutputEntry>& listSent, CAmount& nFee, string& strSentAccount, const isminefilter& filter) const
 {
@@ -1465,6 +1487,7 @@ CAmount CWallet::GetBalance() const
 
     return nTotal;
 }
+
 
 CAmount CWallet::GetUnconfirmedBalance() const
 {

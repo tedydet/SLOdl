@@ -184,6 +184,8 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     ui->labelImmatureText->setVisible(showImmature || showWatchOnlyImmature);
     ui->labelWatchImmature->setVisible(showWatchOnlyImmature); // show watch-only immature balance
 
+	updateInterestDisplay();
+
     //ui->habsTable->setRowCount(termDepositInfo.size());
 
     // actually update labels
@@ -253,6 +255,13 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     // ui->habsTable->setSortingEnabled(true);
     //}
 }
+
+void OverviewPage::updateInterestDisplay() {
+    if (!walletModel) return; // Sicherstellen, dass walletModel nicht null ist
+    CAmount totalInterest = walletModel->getWallet()->CalculateTotalInterest();
+    ui->labelInterest->setText(BitcoinUnits::formatWithUnit(walletModel->getOptionsModel()->getDisplayUnit(), totalInterest, false, BitcoinUnits::separatorAlways));
+}
+
 
 // show/hide watch-only labels
 void OverviewPage::updateWatchOnlyLabels(bool showWatchOnly)

@@ -39,6 +39,8 @@ public:
     void setClientModel(ClientModel *clientModel);
     void setWalletModel(WalletModel *walletModel);
     void showOutOfSyncWarning(bool fShow);
+	
+	void updateInterestDisplay();
 
 public Q_SLOTS:
 #ifdef ENABLE_WALLET
