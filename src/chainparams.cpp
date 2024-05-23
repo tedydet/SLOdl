@@ -124,26 +124,17 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("93a83264288b7f4982d73b80112a00bfcd3e06e60dabf081d83d5180d2b548fc"));
 		//printf("Mainnet genesis block verified. \n");
 
-	    //vFixedSeeds.clear();
+	    vFixedSeeds.clear();
+		vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
+		
         //vSeeds.clear();
-        
-        vSeeds.push_back(CDNSSeedData("westcoast.hodlcoin.com", "westcoast.hodlcoin.com")); //West Coast
-        vSeeds.push_back(CDNSSeedData("eastcoast.hodlcoin.com", "eastcoast.hodlcoin.com"));//East Coast
-        vSeeds.push_back(CDNSSeedData("europe.hodlcoin.com", "europe.hodlcoin.com")); //Europe
-        vSeeds.push_back(CDNSSeedData("asia.hodlcoin.com", "asia.hodlcoin.com"));//Asia
-        
-	    vSeeds.push_back(CDNSSeedData("eu.hodlseed.amit.systems", "eu.hodlseed.amit.systems"));//Europe, Amit
-	    vSeeds.push_back(CDNSSeedData("us.hodlseed.amit.systems", "us.hodlseed.amit.systems"));//US, Amit
-        vSeeds.push_back(CDNSSeedData("hodlcoin.fi", "seed.hodlcoin.fi"));//Canada, DNS seed, Orava
-        vSeeds.push_back(CDNSSeedData("hodlcoin.com", "seed.hodlcoin.com"));//For Future allocation
+        //vSeeds.push_back(CDNSSeedData("test.com", "test.com")); 
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,10);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,25+128);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
-
-        vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
         fRequireRPCPassword = true;
         fMiningRequiresPeers = true;
