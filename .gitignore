@@ -1,6 +1,7 @@
 *.tar.gz
-
+*.TMP
 *.exe
+*.autosave
 src/hashbeans
 src/hasbeansd
 src/hashbeans-cli
