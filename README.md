@@ -1,6 +1,6 @@
 # HashBeans (HABS)
 
-HashBeans is a simplified successor to HOdlcoin: it keeps on-chain interest (~10.26% APR), but removes term deposits/lockups and bonus-era mechanics, to stay usable long-term.
+HashBeans is the sister coin to the blockchain-free community asset Hashcash (HCC) and, at the same time, a simplified successor to HOdlcoin: it keeps on-chain interest (~10.26% APR), but removes term deposits/lockups and bonus-era mechanics, to stay usable long-term.
 
 HOdlcoin’s core idea was fun: balances grow via interest, and HODLing is rewarded on-chain.  
 In practice, the extreme long-term inflation and “numbers get too big” problem made it hard to sustain and hard to operate (exchanges, explorers, wallets, humans).
@@ -68,7 +68,7 @@ HashBeans has **no simple “guaranteed max supply”** once interest is conside
 
 You can compute a **baseline mined supply cap** (the classic halving series) — but **total circulating supply can exceed that** depending on how many UTXOs sit unspent long enough to accumulate interest.
 
-So for websites/exchanges we recommend listing:
+So for websites/exchanges we recommend to communicate:
 
 - **Mined supply cap (baseline, PoW only):** finite (halving series)
 - **Effective supply including interest:** variable / depends on UTXO age distribution
@@ -88,21 +88,20 @@ Interest is calculated on **unspent outputs** (UTXOs) as a function of:
 - output amount
 - output creation height
 - current chain height
-- The APR of an UTXO is about 10.26%
-Interest is capped by design so outputs don’t grow forever. UTXOs that are older than 1 year don't accumulate interestes anymore meaning that abandoned wallets stop accumulating HABS at some point.
+- This results in an average APR of an UTXO of about 10.26%
+These interests are capped by design so outputs don’t grow forever. UTXOs that are older than 1 year don't accumulate interestes anymore meaning that abandoned wallets stop accumulating HABS at some point. Interests can be "reactivate" by creating a new UTXO.
 
 ### Practical consequences
 
 - Holding coins in your own wallet can increase your balance over time.
 - Leaving coins on an exchange may or may not benefit you depending on how the exchange accounts internally.
-- Total supply is not a single clean number unless you define the accounting rules precisely.
 - If you do not move your coins at least once a year, you will no longer receive interest.
   
 ---
 
 ## Proof of Work
 
-HashBeans uses a memory-heavy Proof-of-Work design (Pattern Search / 1GB scratchpad family).  
+Like HOdlcoin, HashBeans uses a memory-heavy Proof-of-Work design (Pattern Search / 1GB scratchpad family).  
 The goal is to keep mining more “participatory” than pure ASIC races.
 
 ---
