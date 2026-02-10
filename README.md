@@ -42,7 +42,7 @@ HashBeans is an attempt to keep the idea *without* letting it grow into an unmai
 
 ## Network parameters (mainnet)
 
-- **Ticker:** HASHB
+- **Ticker:** HABS
 - **Block time:** 154 seconds
 - **P2P port:** 3377
 - **RPC port:** 3376
@@ -54,10 +54,10 @@ HashBeans is an attempt to keep the idea *without* letting it grow into an unmai
 
 | Height range | Block reward |
 |------------:|-------------:|
-| 0 – 99      | 1 HASHB      |
-| 100 – 819,677 | 50 HASHB   |
-| 819,678 – 1,639,355 | 25 HASHB |
-| 1,639,356 – 2,459,033 | 12.5 HASHB |
+| 0 – 99      | 1 HABS      |
+| 100 – 819,677 | 50 HABS   |
+| 819,678 – 1,639,355 | 25 HABS |
+| 1,639,356 – 2,459,033 | 12.5 HABS |
 | …          | halves every interval |
 
 > Exact logic is in `GetBlockSubsidy()` and `consensus.nSubsidyHalvingInterval`.
